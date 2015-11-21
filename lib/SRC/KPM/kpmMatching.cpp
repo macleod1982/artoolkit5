@@ -290,6 +290,7 @@ int kpmSetRefDataSet( KpmHandle *kpmHandle, KpmRefDataSet *refDataSet )
                 }
                 ARLOGi("points-%d\n", points.size());
                 kpmHandle->freakMatcher->addFreakFeaturesAndDescriptors(points,descriptors,points_3d,kpmHandle->refDataSet.pageInfo[k].imageInfo[m].width,kpmHandle->refDataSet.pageInfo[k].imageInfo[m].height,db_id++);
+                kpmHandle->pageIDs[db_id] = kpmHandle->refDataSet.pageInfo[k].pageNo;
             }
         }
     }
@@ -664,6 +665,7 @@ int kpmMatching( KpmHandle *kpmHandle, ARUint8 *inImage )
                 kpmHandle->result[pageLoop].inlierNum = (int)matches.size();
                 ARLOGi("Page[%d]  pre:%3d, aft:%3d, error = %f\n", pageLoop, (int)matches.size(), (int)matches.size(), kpmHandle->result[pageLoop].error);
             }
+            kpmHandle->result[pageLoop].pageNo = kpmHandle->pageIDs[matched_image_id];
         }
 #endif
         free(featureVector.sf);
