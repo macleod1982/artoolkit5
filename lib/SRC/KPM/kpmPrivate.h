@@ -89,6 +89,7 @@ struct _KpmHandle {
     
     KpmResult                *result;
     int                       resultNum;
+    int						  pageIDs[1000];
 };
 
 #endif // !__kpmPrivate_h__
